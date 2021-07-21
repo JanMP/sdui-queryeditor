@@ -1,18 +1,23 @@
 import React, { useRef, useEffect } from 'react'
-import AutoForm from '../uniforms-react/AutoForm'
-import AutoField from '../uniforms-react/AutoField'
+import { AutoForm, AutoField, DynamicField, ControlledSelect } from 'meteor/janmp:sdui-uniforms'
 import {SimpleSchema2Bridge as Bridge} from 'uniforms-bridge-simple-schema-2'
-import DynamicField from '../parts/DynamicField'
-import CodeListenSelect from '../parts/SearchQueryField'
+# import CodeListenSelect from '../parts/SearchQueryField'
 
 import SimpleSchema from 'simpl-schema'
-import { Button, Form, Icon, Input, Select } from 'semantic-ui-react'
+# import { Button, Form, Icon, Input, Select } from 'semantic-ui-react'
 import { getSubjectSelectOptions } from './subjects'
 import { predicateSelectOptions } from './predicates'
 import PartIndex from './PartIndex'
 import _ from 'lodash'
 
-import '../../helpers/simpleSchemaExtension.coffee.md'
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
+import {faTrash} from '@fortawesome/free-solid-svg-icons'
+
+# import '../../helpers/simpleSchemaExtension.coffee.md'
+
+logAndReturn = (x) ->
+  console.log x
+  x
 
 Nothing = -> <span />
 
@@ -59,17 +64,19 @@ export default QuerySentenceEditor = React.memo ({rule, partIndex, bridge, path,
     mutateClone clone
     onChange clone
 
-  selectOptionsForValue = (d) -> _(d.options).find value: d.value
+  # selectOptionsForValue = (d) -> _(d.options).find value: d?.value
 
-  changeSubject = (e, d) ->
+  changeSubject = (d) ->
+    console.log d
     returnRule (r) ->
       r.content.object.value = null
-      r.content.subject = selectOptionsForValue d
+      r.content.subject = d
 
-  changePredicate = (e, d) ->
+  changePredicate = (d) ->
+    console.log d
     returnRule (r) ->
-      r.content.predicate = selectOptionsForValue d
-      if shouldDeleteObject oldPredicate: predicate,  newPredicate: d.value
+      r.content.predicate = d
+      if shouldDeleteObject oldPredicate: predicate,  newPredicate: d
         r.content.object.value = null
 
   changeObject = (d) ->
@@ -121,24 +128,24 @@ export default QuerySentenceEditor = React.memo ({rule, partIndex, bridge, path,
   SentenceForm =
     <div style={display: 'flex'}>
       <div>
-        <Form className="inline" style={display: 'flex'}>
-          <Form.Field>
-            <Select
+        <div className="inline" style={display: 'flex'}>
+          <div className="flex-grow">
+            <ControlledSelect
               value={subject}
               options={subjectSelectOptions}
               onChange={changeSubject}
               style={minWidth: '12em'}
             />
-          </Form.Field>
-          <Form.Field>
-            <Select
+          </div>
+          <div className="flex-grow">
+            <ControlledSelect
               value={rule.content.predicate?.value}
               options={predicateSelectOptions}
               onChange={changePredicate}
               style={minWidth: '5em'}
             />
-          </Form.Field>
-        </Form>
+          </div>
+        </div>
       </div>
       <div>
         <DynamicField
@@ -156,6 +163,8 @@ export default QuerySentenceEditor = React.memo ({rule, partIndex, bridge, path,
   <div className="query-sentence" style={display: 'flex', justifyContent: 'space-between'}>
     {if canDisplay then SentenceForm}
     <div style={flexGrow: 0, flexShrink: 1, marginLeft: '1rem'}>
-      <Button color="red" basic icon="trash" onClick={onRemove}/>
+      <button onClick={onRemove}>
+        <FontAwesomeIcon icon={faTrash}/>
+      </button>
     </div>
   </div>

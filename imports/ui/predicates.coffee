@@ -15,6 +15,7 @@ export predicateSelectOptions =
   _(predicates)
   .keys()
   .map (key) ->
+    key: key
     value: key
-    text: predicates[key]
+    label: predicates[key]
   .value()

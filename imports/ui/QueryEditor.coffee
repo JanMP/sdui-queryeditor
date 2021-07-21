@@ -1,11 +1,10 @@
 import React, {useState} from 'react'
 import QueryBlockEditor from './QueryBlockEditor'
 import {SimpleSchema2Bridge as Bridge} from 'uniforms-bridge-simple-schema-2'
-import { Segment } from 'semantic-ui-react'
 import {getNewBlock} from './queryEditorHelpers'
 import PartIndex from './PartIndex'
 import _ from 'lodash'
-# import './queryEditor.styl'
+
 
 import testRule from './testRule'
 
