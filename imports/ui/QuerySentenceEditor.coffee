@@ -1,5 +1,5 @@
 import React, { useRef, useEffect } from 'react'
-import { AutoForm, AutoField, DynamicField, ControlledSelect } from 'meteor/janmp:sdui-uniforms'
+import { AutoForm, AutoField, DynamicField, ControlledSelect } from 'meteor/janmp:sdui-forms'
 import {SimpleSchema2Bridge as Bridge} from 'uniforms-bridge-simple-schema-2'
 # import CodeListenSelect from '../parts/SearchQueryField'
 

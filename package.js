@@ -15,7 +15,7 @@ Package.onUse(function(api) {
   api.use('ecmascript');
   api.use('coffeescript');
   api.use('typescript');
-  api.use('janmp:sdui-uniforms');
+  api.use('janmp:sdui-forms');
   api.mainModule('sdui-queryeditor.js');
 });
 
@@ -24,7 +24,7 @@ Package.onTest(function(api) {
   api.use('tinytest');
   api.use('coffeescript');
   api.use('typescript');
-  api.use('janmp:sdui-uniforms');
+  api.use('janmp:sdui-forms');
   api.use('sdui-queryeditor');
   api.mainModule('sdui-queryeditor-tests.js');
 });
