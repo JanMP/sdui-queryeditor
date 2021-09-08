@@ -26,5 +26,5 @@ Package.onTest(function(api) {
   api.use('typescript');
   api.use('janmp:sdui-forms');
   api.use('sdui-queryeditor');
-  api.mainModule('sdui-queryeditor-tests.js');
+  api.mainModule('sdui-queryeditor-tests.js', 'client', {lazy: true});
 });
